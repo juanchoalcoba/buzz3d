@@ -23,11 +23,13 @@
     .vertical-title {
       position: fixed;
       left: 200px;
-      top: 50%;
+      top: 60%;
+      width: 30vw;
+      height: 100vh;
       transform: translateY(-50%);
       writing-mode: vertical-rl;
       text-orientation: mixed;
-      font-size: 6rem;
+      font-size: 10rem;
       font-weight: bold;
       color: #ffffff20;
       letter-spacing: 0.3rem;
@@ -40,7 +42,7 @@
 <body>
 
 <!-- 🚀 Título vertical -->
-<div class="vertical-title">Toy Story</div>
+<div class="vertical-title">Buzz Lightyear</div>
 
 <!-- ✅ Librerías -->
 <script src="https://unpkg.com/three@0.138.0/build/three.min.js"></script>
@@ -66,36 +68,38 @@
   const loader = new THREE.GLTFLoader();
 
   loader.load(
-    'buzz_lightyear.glb',
-    function (gltf) {
-      const model = gltf.scene;
-      model.scale.set(1.6, 1.6, 1.6);
-      model.position.y = -1;
-      scene.add(model);
+  'buzz_lightyear.glb',
+  function (gltf) {
+    const model = gltf.scene;
+    model.scale.set(1.6, 1.6, 1.6);
+    model.position.y = -2;
+    scene.add(model);
 
-      gsap.to(model.rotation, {
-        y: Math.PI * 2,
-        scrollTrigger: {
-          trigger: document.body,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: true,
-          markers: true
-        }
-      });
+    gsap.to(model.rotation, {
+      y: Math.PI * 2,
+      scrollTrigger: {
+        trigger: document.body,
+        start: "top top",
+        end: "bottom center",
+        scrub: true,
+        
+      }
+    });
 
-      gsap.to(model.position, {
-        y: 2,
-        scrollTrigger: {
-          trigger: document.body,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: true
-        }
-      });
+    // ✅ Cambiamos el valor final a -0.2 para que no se corte
+    gsap.to(model.position, {
+      y: -0.2,
+      scrollTrigger: {
+        trigger: document.body,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true
+      }
+    });
 
-      animate();
-    },
+    animate();
+  },
+
     undefined,
     function (error) {
       console.error('Error cargando modelo:', error);
@@ -115,7 +119,7 @@
 
   // 🎯 Animación del título con GSAP sutil al hacer scroll
   gsap.to(".vertical-title", {
-    color: "#ffffff",
+    color: "#A8FF60",
     duration: 2,
     scrollTrigger: {
       trigger: document.body,
